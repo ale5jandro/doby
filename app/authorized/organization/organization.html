@@ -1,0 +1,29 @@
+organizaciones
+
+<md-autocomplete
+  md-selected-item="org.selectedItem"
+  md-search-text-change="org.searchTextChange(org.searchText)"
+  md-search-text="org.searchText"
+  md-selected-item-change="org.selectedItemChange(item)"
+  md-items="item in org.querySearch(org.searchText)"
+  md-item-text="item.name"
+  md-min-length="0"
+  placeholder="Elegir organizacion"
+  md-menu-class="autocomplete-custom-template">
+	<md-item-template>
+	  <span class="item-title">
+	    <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+	    <span> {{item.name}} </span>
+	  </span>
+<!-- 	  <span class="item-metadata">
+	    <span>
+	      <strong>{{item.watchers}}</strong> watchers
+	    </span>
+	    <span>
+	      <strong>{{item.forks}}</strong> forks
+	    </span>
+	  </span> -->
+	</md-item-template>
+</md-autocomplete>
+
+{{org.organizations}}
