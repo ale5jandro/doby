@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('organization')
+        .module('organization2')
         .controller('organizationController', OrganizationController);
 
     OrganizationController.$inject = ['dobieFactory', '$mdDialog', '$mdToast'];
@@ -11,8 +11,7 @@
     function OrganizationController(dobieFactory, $mdDialog, $mdToast) {
         var org = this;
 
-        org.querySearch   = querySearch;
-        org.selectedItemChange = selectedItemChange;
+        org.busqueda = "";
 
         activate();
 
@@ -38,6 +37,10 @@
 
 
 
+        }
+
+        org.selectOrg = function(item){
+          org.selectedItem = item;
         }
 
         org.createOrg = function(){
@@ -130,7 +133,6 @@
           org.selectedItem = null;
           org.organizations = [];
           org.newOrg = {};
-          org.searchText = "";
 
           dobieFactory.getOrganizations().then(
             function (response) {
@@ -145,30 +147,6 @@
               );
             }
           );
-        }
-
-
-        function querySearch (query) {
-
-          function filtro(el){
-            if(el.name.toLowerCase().indexOf(this)>=0){
-                return el;
-            }
-
-          }
-
-          var results = query ? org.organizations.filter(filtro, query) : org.organizations;
-          // if (self.simulateQuery) {
-          //   deferred = $q.defer();
-          //   $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-          //   return deferred.promise;
-          // } else {
-            return results;
-          // }
-        }
-
-        function selectedItemChange(item) {
-          //$log.info('Item changed to ' + JSON.stringify(item));
         }
 
 

@@ -1,0 +1,69 @@
+<!-- <div> -->
+	<md-card class="cardConCabecera">
+		<md-card-title>
+	    	<md-card-title-text class="md-headline">
+	    		Organizaciones
+	    	</md-card-title-text>
+	    </md-card-title>
+	    <md-card-content layout="row" class="noScroll">
+	    	<!-- <div> -->
+	    	<div flex="50">
+				<md-input-container style="margin:0px">
+					<label>Buscar</label>
+				    <input ng-model="org.busqueda">
+				</md-input-container>
+				<md-list class="md-dense listaAle" style="overflow: auto;">
+					<md-list-item ng-repeat="item in org.organizations | filter:org.busqueda" ng-if="item.rowStateId!=5" ng-click="org.selectOrg(item)">
+					    <div class="md-list-item-text" layout="column" ng-class="{itemGreen: item.rowStateId == 3, itemRed: item.rowStateId == 4, itemYellow: item.rowStateId == 1, itemOrange: item.rowStateId == 2}">
+					    	{{item.name}}
+		            	</div>
+		          	</md-list-item>
+				</md-list>
+			</div>
+
+
+			<div layout="column" flex>
+				<div>
+					<fieldset layout="column">
+						<legend>Organizacion seleccionada</legend>
+						<md-input-container>
+						    <label>Nombre de Organizacion</label>
+					        <input ng-model="org.selectedItem.name" ng-disabled="!org.selectedItem">
+					    </md-input-container>
+
+					    <div layout="row">
+						    <md-button class="md-raised md-primary" ng-disabled="!org.selectedItem" ng-click="org.updateOrg()">Modificar</md-button>
+						    <md-button class="md-raised md-primary" ng-disabled="!org.selectedItem" ng-click="org.deleteOrg()">Eliminar</md-button>
+					    </div>
+				    </fieldset>
+		    	</div>
+
+				<div>
+				    <fieldset layout="column">
+					    <legend>Nueva Organizacion</legend>
+						<md-input-container>
+						    <label>Nombre de Organizacion</label>
+					        <input ng-model="org.newOrg.name">
+					    </md-input-container>
+					    <md-button class="md-raised md-primary" ng-click="org.createOrg()">Agregar</md-button>
+					</fieldset>
+				</div>
+
+				<div>
+				    <fieldset layout="column">
+					    <legend>Referencias</legend>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refRed"></div> &ensp;Por eliminar</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refGreen"></div> &ensp;Actualizada</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refOrange"></div> &ensp;Por actualizar</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refYellow"></div> &ensp;Por agregar</div>
+					</fieldset>
+				</div>
+			</div>
+		</md-card-content>
+	</md-card>
+<!-- div -->
+
+
+
+
+

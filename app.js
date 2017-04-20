@@ -67,13 +67,15 @@ app.use(logMiddleware());
 
 app.use(function(req, res, next) {
 //loguear todo
-  console.log(req.url);
+  //console.log(req.url);
   next();
 });
 
 app.use("/ale", function(req, res, next) {
 //loguear todo
+  console.log(req);
   res.send("ale");
+
 });
 
 app.use('/', express.static(path.join(__dirname, 'app')));
@@ -83,13 +85,29 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 
 var ser = app.listen(config.port);
 
-
+app.use('/backend', function(req, res, next){ //isAuthenticated(),
+  if(req.session){
+    var options = {
+      url: config.backendProtocol+'://'+config.backendIP+req.url,//https
+      headers: {
+        // 'userSystemId': req.session.uid
+        'Authorization': 'Basic YWRtaW46YWRtaW4='
+      }
+    };
+  }else{
+    var options = {
+      url: config.backendProtocol+'://'+config.backendIP+req.url
+    };
+  }
+  console.log(options.url)
+  req.pipe(request(options)).pipe(res);
+});
 
 function isAuthenticated(){
 
 
   return function(req, res, next) {
-console.log("aunt", req.session.uid);
+// console.log("aunt", req.sesssion.uid);
     if (req.session.uid){
          //puede pasar
       next();

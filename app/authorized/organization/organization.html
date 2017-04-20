@@ -1,29 +1,60 @@
-organizaciones
+<md-card>
+	<md-card-title>
+    	<md-card-title-text class="md-headline">
+    		Organizaciones
+    	</md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+		<md-autocomplete
+		  md-selected-item="org.selectedItem"
+		  md-search-text-change="org.searchTextChange(org.searchText)"
+		  md-search-text="org.searchText"
+		  md-selected-item-change="org.selectedItemChange(item)"
+		  md-items="item in org.querySearch(org.searchText)"
+		  md-item-text="item.name"
+		  md-min-length="0"
+		  placeholder="Elegir organizacion"
+		  md-menu-class="autocomplete-custom-template">
+			<md-item-template>
+			  <span class="item-title">
+			    <!-- <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon> -->
+			    <span> {{item.name}} </span>
+			  </span>
+		<!-- 	  <span class="item-metadata">
+			    <span>
+			      <strong>{{item.watchers}}</strong> watchers
+			    </span>
+			    <span>
+			      <strong>{{item.forks}}</strong> forks
+			    </span>
+			  </span> -->
+			</md-item-template>
+		</md-autocomplete>
 
-<md-autocomplete
-  md-selected-item="org.selectedItem"
-  md-search-text-change="org.searchTextChange(org.searchText)"
-  md-search-text="org.searchText"
-  md-selected-item-change="org.selectedItemChange(item)"
-  md-items="item in org.querySearch(org.searchText)"
-  md-item-text="item.name"
-  md-min-length="0"
-  placeholder="Elegir organizacion"
-  md-menu-class="autocomplete-custom-template">
-	<md-item-template>
-	  <span class="item-title">
-	    <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
-	    <span> {{item.name}} </span>
-	  </span>
-<!-- 	  <span class="item-metadata">
-	    <span>
-	      <strong>{{item.watchers}}</strong> watchers
-	    </span>
-	    <span>
-	      <strong>{{item.forks}}</strong> forks
-	    </span>
-	  </span> -->
-	</md-item-template>
-</md-autocomplete>
+		<md-card-content>
+			<fieldset layout="column">
+				<legend>Organizacion seleccionada</legend>
+				<md-input-container>
+				    <label>Nombre de Organizacion</label>
+			        <input ng-model="org.selectedItem.name" ng-disabled="!org.selectedItem">
+			    </md-input-container>
 
-{{org.organizations}}
+			    <div layout="row">
+				    <md-button class="md-raised md-primary" ng-disabled="!org.selectedItem" ng-click="org.updateOrg()">Modificar</md-button>
+				    <md-button class="md-raised md-primary" ng-disabled="!org.selectedItem" ng-click="org.deleteOrg()">Eliminar</md-button>
+			    </div>
+		    </fieldset>
+    	</md-card-content>
+
+		<md-card-content>
+		    <fieldset layout="column">
+			    <legend>Nueva Organizacion</legend>
+				<md-input-container>
+				    <label>Nombre de Organizacion</label>
+			        <input ng-model="org.newOrg.name">
+			    </md-input-container>
+			    <md-button class="md-raised md-primary" ng-click="org.createOrg()">Agregar</md-button>
+				</md-card-content>
+			</fieldset>
+		</md-card-content>
+</md-card>

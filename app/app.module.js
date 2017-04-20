@@ -3,6 +3,7 @@
     angular.module('doby', [
       'app.core',
       'app.login',
-      'authorized'
+      'authorized',
+      'dobie.services'
     ]);
 }());
