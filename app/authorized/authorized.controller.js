@@ -14,11 +14,11 @@
         au.pages = [
             {
                 name: 'Organizations',
-                link: ''
+                link: 'authorized.organization2'
             },
             {
                 name: 'Persons',
-                link: ''
+                link: 'authorized.person'
             }];
 
         activate();

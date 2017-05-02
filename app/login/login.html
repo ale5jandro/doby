@@ -23,10 +23,8 @@
           <div layout="row" layout-align='center center' style="margin-top: 30px;">
             <md-input-container flex="50">
               <label>Usuario</label>
-              <input type="email" required ng-model="vm.username" name="yuliUser" ng-pattern="/^.+@.+\..+$/"/ tabindex="1">
-              <div class="hint" ng-if="vm.showHints && !loginForm.yuliUser.$touched">Ejemplo: usuario@unc.edu.ar </div>
-              <div ng-messages="loginForm.yuliUser.$error" md-auto-hide="false" ng-show="loginForm.yuliUser.$touched">
-                <div ng-message="pattern"> Ingrese un formato de correo válido </div>
+              <input required ng-model="vm.username" name="userser">
+              <div ng-messages="loginForm.userser.$error" md-auto-hide="false" ng-show="loginForm.user.$touched">
                 <div ng-message="required">Ingrese un nombre de usuario</div>
               </div>
             </md-input-container>
@@ -35,9 +33,8 @@
             <md-input-container flex="50">
               <label>Contraseña</label>
               <!-- <input type="password" name="yuliPassword" required ng-model="vm.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" tabindex="2"> -->
-              <input type="password" name="yuliPassword" required ng-model="vm.password" tabindex="2">
-              <div class="hint" ng-if="vm.showHints && !loginForm.yuliPassword.$touched">Al menos 8 caracteres, una mayúscula y un número </div>
-              <div ng-messages="loginForm.yuliPassword.$error" >
+              <input type="password" name="password" required ng-model="vm.password" tabindex="2">
+              <div ng-messages="loginForm.password.$error" >
                 <!-- <div ng-message="pattern"> La contraseña debe tener al menos 8 caracteres, un número y una mayuscula</div> -->
                 <div ng-message="required">Ingrese una contraseña</div>
               </div>

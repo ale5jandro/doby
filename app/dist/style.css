@@ -26,6 +26,10 @@
 	overflow: auto;
 }
 
+.realNoScroll{
+	overflow: hidden;
+}
+
 .dobbieReference{
 	height: 10px;
 	width: 10px;
@@ -66,5 +70,20 @@
 }
 
 .listaAle{
-	height: calc( 100% - 60px );
+	height: calc( 100% - 80px );
+}
+
+.seleccionable{
+	cursor: pointer;
+}
+
+.seleccionable:hover{
+	background-color: #ececec;
+}
+
+.divSimilCard{
+	flex-direction: column;
+    margin: 15px;
+    display: flex;
+    box-sizing: border-box;
 }

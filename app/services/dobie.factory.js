@@ -13,12 +13,16 @@
     	getOrganizations	: getOrganizations,
       postOrganization  : postOrganization,
       putOrganization   : putOrganization,
-      deleteOrganization : deleteOrganization
+      deleteOrganization : deleteOrganization,
+      getPersons  : getPersons,
+      postPerson  : postPerson,
+      putPerson   : putPerson,
+      deletePerson : deletePerson
     };
 
     return service;
 
-
+    //organizavcion
     function getOrganizations() {
       return $http.get(URL.DOBIE + 'organization');
     }
@@ -40,6 +44,37 @@
     function deleteOrganization(id) {
       return $http.delete(URL.DOBIE + 'organization/' + id);
     }
+
+
+    //person
+    function getPersons(id) {
+      return $http.get(URL.DOBIE + 'organization/' + id);
+    }
+
+    function postPerson(name, card, org) {
+      var newPer = {
+        name: name,
+        cardNumber: card,
+        orgId: org,
+        visitedOrgId: org
+      }
+      return $http.post(URL.DOBIE + 'person', newPer);
+    }
+
+    function putPerson(name, card, id, orgId) {
+      var newOrg = {
+        name: name,
+        cardNumber: card,
+        orgId: orgId,
+        visitedOrgId: orgId
+      }
+      return $http.put(URL.DOBIE + 'person/' + id, newOrg);
+    }
+
+    function deletePerson(id) {
+      return $http.delete(URL.DOBIE + 'person/' + id);
+    }
+
 
    }
 })();

@@ -2,5 +2,6 @@
   'use strict';
     angular.module('authorized', 
    ['organization',
-   'organization2']);
+   'organization2',
+   'person']);
 }());

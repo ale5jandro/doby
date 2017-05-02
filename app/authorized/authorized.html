@@ -26,8 +26,8 @@
       <md-toolbar>
           <h1 class="md-toolbar-tools">Dobie</h1>
       </md-toolbar>
-      <md-content layout-padding>
-          <div ng-repeat="op in au.pages">
+      <md-content layout-padding class="defaultColors">
+          <div ng-repeat="op in au.pages" class="seleccionable" ui-sref="{{op.link}}">
             {{op.name}}
           </div>
       </md-content>

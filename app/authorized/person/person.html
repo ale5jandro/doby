@@ -1,0 +1,125 @@
+<div class="cardConCabecera divSimilCard">	    	      		
+	<!-- <md-card class="cardConCabecera"> -->
+		<md-card-title>
+	    	<md-card-title-text layout="row">
+	    		<span class="md-headline">Personas en </span>
+
+				<md-input-container style="margin-left: 5px; margin-top: 0px;">
+	        		<label>Seleccionar Organización</label>
+			        <md-select ng-model="p.selectedOrg" md-on-close="p.selectOrg()">
+			        	<md-option ng-value="org" ng-repeat="org in p.organizations">{{org.name}}</md-option>
+			        </md-select>
+			    </md-input-container>
+
+
+	    	</md-card-title-text>
+
+	    </md-card-title>
+	    <md-card-content layout="row" class="noScroll">
+	    	<!-- <div> -->
+	    	<div flex="50">
+				<md-input-container style="margin:0px">
+					<label>Buscar</label>
+				    <input ng-model="p.busqueda">
+				</md-input-container>
+				<md-list class="md-dense listaAle" style="overflow: auto;">
+					<md-list-item ng-repeat="item in p.persons | filter:p.busqueda" ng-if="item.rowStateId!=5" ng-click="p.selectPer(item)">
+					    <div class="md-list-item-text" layout="column" ng-class="{itemGreen: item.rowStateId == 3, itemRed: item.rowStateId == 4, itemYellow: item.rowStateId == 1, itemOrange: item.rowStateId == 2}">
+					    	{{item.name}}
+		            	</div>
+		          	</md-list-item>
+				</md-list>
+			</div>
+
+<!-- {{p.selectedItem}} -->
+			<div layout="column" flex>
+				<div>
+					<md-card layout="column" ng-show="!p.flagEditPerson" ng-click="p.toggleEditPerson()">
+						<md-card-title>
+		    				<md-card-title-text layout="row">
+		    					Persona seleccionada
+		    				</md-card-title-text>
+		    			</md-card-title>
+					</md-card>
+					<md-card layout="column" ng-show="p.flagEditPerson" ng-click="p.toggleEditPerson()">
+						<md-card-title>
+		    				<md-card-title-text layout="row">
+		    					Persona seleccionada
+		    				</md-card-title-text>
+		    			</md-card-title>
+						<!-- <legend>Personas seleccionada</legend> -->
+						<md-card-content>
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Nombre de la Persona</label>
+						        <input ng-model="p.selectedItem.name" ng-disabled="!p.selectedItem">
+						    </md-input-container>
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Número de identificación</label>
+						        <input ng-model="p.selectedItem.identification" ng-disabled="!p.selectedItem">
+						    </md-input-container>
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Número de tarjeta</label>
+						        <input ng-model="p.selectedItem.cardNumber" ng-disabled="!p.selectedItem">
+						    </md-input-container>
+					    </md-card-content>
+					    <md-card-actions layout="row" layout-align="end center">
+						    <md-button class="md-raised md-primary" ng-disabled="!p.selectedItem" ng-click="p.updatePer();$event.stopPropagation()">Modificar</md-button>
+						    <md-button class="md-raised md-primary" ng-disabled="!p.selectedItem" ng-click="p.deletePer();$event.stopPropagation()">Eliminar</md-button>
+					    </md-card-actions>
+				    </md-card>
+		    	</div>
+
+				<div>
+
+					<md-card layout="column" ng-show="!p.flagNewPerson" ng-click="p.toggleNewPerson()">
+						<md-card-title>
+		    				<md-card-title-text layout="row">
+		    					Nueva persona
+		    				</md-card-title-text>
+		    			</md-card-title>
+					</md-card>
+
+				    <md-card layout="column" ng-show="p.flagNewPerson" ng-click="p.toggleNewPerson()">
+						<md-card-title>
+		    				<md-card-title-text layout="row">
+		    					Nueva persona
+		    				</md-card-title-text>
+		    			</md-card-title>
+		    			<md-card-content >
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Nombre de la persona</label>
+						        <input ng-model="p.newPer.name">
+						    </md-input-container>
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Número de identificación</label>
+						        <input ng-model="p.newPer.identification">
+						    </md-input-container>
+							<md-input-container ng-click="$event.stopPropagation()">
+							    <label>Número de tarjeta</label>
+						        <input ng-model="p.newPer.card">
+						    </md-input-container>
+						</md-card-content>
+						<md-card-actions layout="row" layout-align="end center">
+					    	<md-button class="md-raised md-primary" ng-click="p.createPer();$event.stopPropagation()">Agregar</md-button>
+						</md-card-actions>					    	
+					</md-card>
+				</div>
+
+				<div>
+				    <fieldset layout="column">
+					    <legend>Referencias</legend>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refRed"></div> &ensp;Por eliminar</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refGreen"></div> &ensp;Actualizada</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refOrange"></div> &ensp;Por actualizar</div>
+					    <div layout="row" layout-align="start center"><div class="dobbieReference refYellow"></div> &ensp;Por agregar</div>
+					</fieldset>
+				</div>
+			</div>
+		</md-card-content>
+	<!-- </md-card> -->
+</div>
+
+
+
+
+

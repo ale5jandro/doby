@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app='doby' class="noScroll">
+<html ng-app='doby' class="realNoScroll">
   <head>
     <meta charset="utf-8">
     <title>Dobie</title> <!-- TODO: VER http://stackoverflow.com/questions/23813599/set-page-title-using-ui-router -->
@@ -15,6 +15,8 @@
   <body class="background-gray">
     <div ui-view class="full-size">
     </div>
+    <!-- <script type="text/javascript" src='/bower_components/jquery/dist/jquery.min.js' ></script> -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src='/bower_components/angular/angular.min.js' ></script>
     <script type="text/javascript" src='/bower_components/angular-ui-router/release/angular-ui-router.min.js'></script>
 
@@ -47,6 +49,10 @@
     <script type="text/javascript" src='/authorized/organization2/organization.module.js'></script>
     <script type="text/javascript" src='/authorized/organization2/organization.route.js'></script>
     <script type="text/javascript" src='/authorized/organization2/organization.controller.js'></script>
+
+    <script type="text/javascript" src='/authorized/person/person.module.js'></script>
+    <script type="text/javascript" src='/authorized/person/person.route.js'></script>
+    <script type="text/javascript" src='/authorized/person/person.controller.js'></script>
 
     <script type="text/javascript" src='/app.module.js'></script>
 
