@@ -11,19 +11,19 @@
 
   <md-content class="no-background login-content" flex layout="row" layout-align-gt-xs="center center" layout-align='center center'>
 
-    <md-card class='login-card animated' flex ng-class="{'flipOutY': vm.transitionOut,'fadeIn': !vm.transitionOut}" layout="row">
+    <md-card class='login-card animated' flex ng-class="{'flipOutY': lg.transitionOut,'fadeIn': !lg.transitionOut}" layout="row">
       <!-- <div flex="40">
         <img src="app/images/monserrat-foto.jpg" />
       </div> -->
       <div flex="100">
         <div class="" layout='row' layout-align="center center">
-          <img src="app/images/monserrat.png" class="login-profile-img" />
+          <img src="dist/dobie.svg" class="login-profile-img" />
         </div>
-        <form ng-submit="vm.authenticate()" layout="column" name="loginForm" class="loginForm">
+        <form ng-submit="lg.login()" layout="column" name="loginForm" class="loginForm">
           <div layout="row" layout-align='center center' style="margin-top: 30px;">
             <md-input-container flex="50">
               <label>Usuario</label>
-              <input required ng-model="vm.username" name="userser">
+              <input required ng-model="lg.username" name="userser">
               <div ng-messages="loginForm.userser.$error" md-auto-hide="false" ng-show="loginForm.user.$touched">
                 <div ng-message="required">Ingrese un nombre de usuario</div>
               </div>
@@ -33,7 +33,7 @@
             <md-input-container flex="50">
               <label>Contraseña</label>
               <!-- <input type="password" name="yuliPassword" required ng-model="vm.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" tabindex="2"> -->
-              <input type="password" name="password" required ng-model="vm.password" tabindex="2">
+              <input type="password" name="password" required ng-model="lg.password" tabindex="2">
               <div ng-messages="loginForm.password.$error" >
                 <!-- <div ng-message="pattern"> La contraseña debe tener al menos 8 caracteres, un número y una mayuscula</div> -->
                 <div ng-message="required">Ingrese una contraseña</div>

@@ -52,7 +52,6 @@
         p.createPer = function(){
           dobieFactory.postPerson(p.newPer.name, p.newPer.card, selectedOrg).then(
             function (response) {
-              console.log("RESPONSE", response.data);
               parcialClean();
               $mdToast.show(
                 $mdToast.simple()

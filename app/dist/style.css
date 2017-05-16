@@ -1,4 +1,21 @@
+.login-profile-img{
+  width: 100px;
+  margin-top: 5%;
+}
 
+@media (max-width: 800px) {
+
+  .unc-image{
+    position: absolute;
+    left: 12%!important;
+    width: 100px!important;
+  }
+
+  .login-profile-img{
+    width: 180px!important;
+    // margin-top: 5%;
+  }
+}
 
 .full-size{
 	height: 100%;

@@ -2,11 +2,13 @@
   <md-toolbar class="tollbarAle">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" aria-label="Navigate" ng-click="au.showMenu();">
-        <!-- <md-icon md-svg-icon="img/icons/menu.svg"></md-icon> -->
         <i class="material-icons">menu</i>
+        <md-tooltip>
+          Menu
+        </md-tooltip>
       </md-button>
-
-      <h2 flex md-truncate>Dobie</h2>
+      <h2 >Dobie</h2>
+      <md-icon md-svg-icon="dist/dobie.svg" style="margin:0px;"></md-icon>
 
   <!--     <md-button class="md-icon-button" aria-label="Favorite">
         <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
@@ -15,7 +17,16 @@
       <md-button class="md-icon-button" aria-label="More">
         <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
       </md-button> -->
+      <div flex>
+      </div>
+      <md-button class="md-icon-button" aria-label="Eat cake">
+          <i class="material-icons">power_settings_new</i>
+          <md-tooltip>
+              Cerrar Sesión
+          </md-tooltip>
+      </md-button>
     </div>
+
   </md-toolbar>
 
   <md-sidenav
@@ -23,14 +34,16 @@
           md-component-id="left"
           md-is-locked-open="false"
           md-whiteframe="4">
-      <md-toolbar>
-          <h1 class="md-toolbar-tools">Dobie</h1>
+      <md-toolbar layout="row">
+          <h1 class="md-toolbar-tools" style="width: initial;">Dobie</h1>
+          <md-icon md-svg-icon="dist/dobie.svg" style="margin:0px;margin-top: auto;margin-bottom: auto;"></md-icon>
       </md-toolbar>
       <md-content layout-padding class="defaultColors">
           <div ng-repeat="op in au.pages" class="seleccionable" ui-sref="{{op.link}}">
             {{op.name}}
           </div>
       </md-content>
+
 
 
   </md-sidenav>
