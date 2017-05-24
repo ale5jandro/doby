@@ -103,7 +103,7 @@ app.use('/backendLogin', function(req, res, next){
                           
       }
   };
-
+  console.log(options)
   request
   .get(options)
   .on('response', function(response) {
