@@ -110,6 +110,10 @@ app.use('/backendLogin', function(req, res, next){
     res.sendStatus(response.statusCode);
   })
 
+  .on('error', function(err){
+    console.log(err);
+  })
+
 
   // console.log(options.url);
   // req.pipe(request(options)).on('response', function(response) {
