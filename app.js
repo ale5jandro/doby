@@ -3,6 +3,8 @@ var session = require('express-session');
 var url = require('url');
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
+
 
 
 var app = express();
@@ -63,11 +65,11 @@ var sessionMiddleware = session({
 
 app.use(sessionMiddleware);
 app.use(logMiddleware());
-
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
 //loguear todo
-  //console.log(req.url);
+  console.log(req.url);
   next();
 });
 
@@ -85,13 +87,60 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 
 var ser = app.listen(config.port);
 
+
+
+app.use('/backendLogin', function(req, res, next){
+  console.log(req.body);
+  var stringToEncode = req.body.user+':'+req.body.pass;
+  var encodedString = new Buffer(stringToEncode).toString('base64')
+  req.session.auth = encodedString;
+  var options = {
+    url: config.backendProtocol+'://'+config.backendIP+'/login',//https
+    method: 'GET',
+    headers: {
+        //'Authorization': 'Basic YWRtaW46YWRtaW4='
+        'Authorization': 'Basic '+encodedString
+                          
+      }
+  };
+
+  request
+  .get(options)
+  .on('response', function(response) {
+    res.sendStatus(response.statusCode);
+  })
+
+
+  // console.log(options.url);
+  // req.pipe(request(options)).on('response', function(response) {
+  //   // response.on('data', function(chunk) {
+  //   //   var aux = chunk+'';
+  //   //   if(aux){
+  //   //     req.session.uid = JSON.parse(aux).id;
+  //   //     req.log("login", req.session.uid);
+  //   //   }
+  //   // });
+  //   request.on("data",function(data) {
+  //     console.log(data);
+  //   })
+  //   // response.on('end', function(data) {
+  //   //   console.log("termino")
+  //   // })
+  //   // response.on('finish', function(data) {
+  //   //   console.log("termino")
+  //   // })
+  // }).pipe(res);
+});
+
+
+
 app.use('/backend', function(req, res, next){ //isAuthenticated(),
-  if(req.session){
+  if(req.session && req.session.auth){
     var options = {
       url: config.backendProtocol+'://'+config.backendIP+req.url,//https
       headers: {
         // 'userSystemId': req.session.uid
-        'Authorization': 'Basic YWRtaW46YWRtaW4='
+        'Authorization': 'Basic '+req.session.auth
       }
     };
   }else{
@@ -99,9 +148,11 @@ app.use('/backend', function(req, res, next){ //isAuthenticated(),
       url: config.backendProtocol+'://'+config.backendIP+req.url
     };
   }
-  console.log(options.url)
+  // console.log(options.url)
   req.pipe(request(options)).pipe(res);
 });
+
+
 
 function isAuthenticated(){
 
