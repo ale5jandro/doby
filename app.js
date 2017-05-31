@@ -65,17 +65,18 @@ var sessionMiddleware = session({
 
 app.use(sessionMiddleware);
 app.use(logMiddleware());
-app.use(bodyParser.json());
+
+// app.use(parser.json());
 
 app.use(function(req, res, next) {
 //loguear todo
-  console.log(req.url);
+  // console.log(req.url);
   next();
 });
 
 app.use("/ale", function(req, res, next) {
 //loguear todo
-  console.log(req);
+  // console.log(req);
   res.send("ale");
 
 });
@@ -89,74 +90,66 @@ var ser = app.listen(config.port);
 
 
 
-app.use('/backendLogin', function(req, res, next){
-  console.log(req.body);
-  var stringToEncode = req.body.user+':'+req.body.pass;
-  var encodedString = new Buffer(stringToEncode).toString('base64')
-  req.session.auth = encodedString;
-  var options = {
-    url: config.backendProtocol+'://'+config.backendIP+'/login',//https
-    method: 'GET',
-    headers: {
-        //'Authorization': 'Basic YWRtaW46YWRtaW4='
-        'Authorization': 'Basic '+encodedString
-                          
-      }
-  };
-  console.log(options)
-  request
-  .get(options)
-  .on('response', function(response) {
-    res.sendStatus(response.statusCode);
-  })
 
-  .on('error', function(err){
-    console.log(err);
-  })
-
-
-  // console.log(options.url);
-  // req.pipe(request(options)).on('response', function(response) {
-  //   // response.on('data', function(chunk) {
-  //   //   var aux = chunk+'';
-  //   //   if(aux){
-  //   //     req.session.uid = JSON.parse(aux).id;
-  //   //     req.log("login", req.session.uid);
-  //   //   }
-  //   // });
-  //   request.on("data",function(data) {
-  //     console.log(data);
-  //   })
-  //   // response.on('end', function(data) {
-  //   //   console.log("termino")
-  //   // })
-  //   // response.on('finish', function(data) {
-  //   //   console.log("termino")
-  //   // })
-  // }).pipe(res);
-});
 
 
 
 app.use('/backend', function(req, res, next){ //isAuthenticated(),
+  console.log(req.method);
   if(req.session && req.session.auth){
     var options = {
       url: config.backendProtocol+'://'+config.backendIP+req.url,//https
+      // method: req.method,
       headers: {
-        // 'userSystemId': req.session.uid
-        'Authorization': 'Basic '+req.session.auth
+        'Authorization': 'Basic '+req.session.auth,
+        // 'Content-Type': 'application/json'
       }
     };
   }else{
     var options = {
-      url: config.backendProtocol+'://'+config.backendIP+req.url
+      url: config.backendProtocol+'://'+config.backendIP+req.url,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     };
   }
-  // console.log(options.url)
+  // console.log(options)
   req.pipe(request(options)).pipe(res);
 });
 
+app.use(bodyParser.json());
 
+app.use('/backendLogin', function(req, res, next){
+  // bodyParser(req, res, function() {
+    console.log(req.body);
+
+    var stringToEncode = req.body.user+':'+req.body.pass;
+    var encodedString = new Buffer(stringToEncode).toString('base64')
+    req.session.auth = encodedString;
+
+    var options = {
+      url: config.backendProtocol+'://'+config.backendIP+'/login',//https
+      method: 'GET',
+      headers: {
+          'Authorization': 'Basic '+encodedString,
+          'Content-Type': 'application/json'
+        }
+    };
+    // console.log(options)
+    request
+    .get(options)
+    .on('response', function(response) {
+      res.sendStatus(response.statusCode);
+    })
+
+    .on('error', function(err){
+      console.log(err);
+    })
+  // });
+
+
+
+});
 
 function isAuthenticated(){
 
@@ -174,6 +167,8 @@ function isAuthenticated(){
   }
 
 }
+
+
 
 process.on('uncaughtException', function (exception) {
   // handle or ignore error
