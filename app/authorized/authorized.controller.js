@@ -5,10 +5,10 @@
         .module('authorized')
         .controller('authorizedController', AuthorizedController);
 
-    AuthorizedController.$inject = ['$mdSidenav'];
+    AuthorizedController.$inject = ['$mdSidenav', 'dobieFactory', '$state', '$mdToast'];
 
     /* @ngInject */
-    function AuthorizedController($mdSidenav ) {
+    function AuthorizedController($mdSidenav, dobieFactory, $state, $mdToast ) {
         var au = this;
 
         au.pages = [
@@ -25,6 +25,21 @@
 
         function activate() {
 
+        }
+
+        au.logout = function(){
+            dobieFactory.logout().then(
+                function(response){
+                    $state.go('login');
+                },
+                function(response){
+                    $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(response.data.error)
+                        .hideDelay(3000)
+                    );
+                }
+            );
         }
 
         au.showMenu = function(){

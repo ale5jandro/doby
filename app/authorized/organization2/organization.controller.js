@@ -20,21 +20,6 @@
           cleanController();
 
 
-            // org.organizations = [
-            //      {
-            //      "name": "Unknown",
-            //      "uri": "http://10.10.7.74:5000/api/v1.0/organization/1"
-            //      },
-            //      {
-            //      "name": "Building Networks",
-            //      "uri": "http://10.10.7.74:5000/api/v1.0/organization/2"
-            //      },
-            //      {
-            //      "name": "Datacenter",
-            //      "uri": "http://10.10.7.74:5000/api/v1.0/organization/3"
-            //      }
-            // ]
-
 
 
         }
@@ -46,7 +31,7 @@
         org.createOrg = function(){
           dobieFactory.postOrganization(org.newOrg.name).then(
             function (response) {
-              console.log("RESPONSE", response.data);
+              // console.log("RESPONSE", response.data);
               cleanController();
               $mdToast.show(
                 $mdToast.simple()
@@ -72,7 +57,7 @@
           aux = org.selectedItem.uri.split("/")
           dobieFactory.putOrganization(org.selectedItem.name, aux[aux.length-1]).then(
             function (response) {
-              console.log("RESPONSE", response.data);
+              // console.log("RESPONSE", response.data);
               cleanController();
               $mdToast.show(
                 $mdToast.simple()

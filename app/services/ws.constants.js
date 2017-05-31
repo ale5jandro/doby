@@ -3,6 +3,7 @@ angular
     .constant('urls',
   {
     DOBIE: 'backend/',
-    LOGIN: 'backendLogin/'
+    LOGIN: 'backendLogin/',
+    LOGOUT: 'backendLogout/'
   }
 );

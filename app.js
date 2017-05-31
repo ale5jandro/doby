@@ -70,7 +70,7 @@ app.use(logMiddleware());
 
 app.use(function(req, res, next) {
 //loguear todo
-  // console.log(req.url);
+  console.log(req.url);
   next();
 });
 
@@ -95,7 +95,7 @@ var ser = app.listen(config.port);
 
 
 app.use('/backend', function(req, res, next){ //isAuthenticated(),
-  console.log(req.method);
+  // console.log(req.method);
   if(req.session && req.session.auth){
     var options = {
       url: config.backendProtocol+'://'+config.backendIP+req.url,//https
@@ -117,11 +117,16 @@ app.use('/backend', function(req, res, next){ //isAuthenticated(),
   req.pipe(request(options)).pipe(res);
 });
 
+app.use('/backendLogout', function(req, res, next){
+  req.session.auth = null;
+  res.sendStatus(200);
+})
+
 app.use(bodyParser.json());
 
 app.use('/backendLogin', function(req, res, next){
   // bodyParser(req, res, function() {
-    console.log(req.body);
+    // console.log(req.body);
 
     var stringToEncode = req.body.user+':'+req.body.pass;
     var encodedString = new Buffer(stringToEncode).toString('base64')
@@ -147,9 +152,9 @@ app.use('/backendLogin', function(req, res, next){
     })
   // });
 
-
-
 });
+
+
 
 function isAuthenticated(){
 
